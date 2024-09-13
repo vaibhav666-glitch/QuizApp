@@ -48,35 +48,57 @@ function Pagination ({totalItems, itemsPerPage, currentPage, setCurrentPage,setS
         
 
     return(
-        <>
-          <div className="text-xl text-center mb-4">
-            Time Left: <span className="font-bold">{timer}m</span>
-          </div>
-
-        <div className="flex justify-center items-center space-x-3 mt-4">
-        {pagNumber.map((i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentPage(i)}
-            className={`px-3 py-1 rounded-lg border ${
-              currentPage === i ? 'bg-blue-500 text-white border-blue-500' : 'bg-gray-200 border-gray-300'
-            } hover:bg-blue-400 hover:text-white transition duration-300 ease-in-out`}
-          >
-            {i}
-          </button>
-
-          
-        ))}
-
-            <button
-           
-            onClick={() => handleSubmit()}
-            className={`px-3 space-x-4 py-4 rounded-lg border bg-green-500  hover:bg-blue-400 hover:text-white transition duration-300 ease-in-out`}
-          >
-            Submit
-          </button>
+      <>
+       {/* Timer */}
+       <div className="text-lg text-center mb-4">
+        Time Left: <span className="font-medium text-purple-600">{timer}m</span>
       </div>
-      </>
+    
+      {/* Nav Buttons */}
+      <div className="flex items-center justify-between mb-5 mx-4">
+        {/* Prev Button */}
+        <button
+          onClick={() => setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={`px-5 py-2 rounded-lg ${currentPage === 1 ? 'bg-gray-400 cursor-not-allowed' : 'bg-purple-700 text-white hover:bg-purple-600'} transition duration-200`}
+        >
+          Prev
+        </button>
+    
+        {/* Page Numbers */}
+        <div className="flex flex-grow justify-center space-x-2">
+          {pagNumber.map((i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i)}
+              className={`px-4 py-2 rounded-lg ${currentPage === i ? 'bg-purple-700 text-white' : 'bg-white text-purple-700 border border-purple-700'} hover:bg-purple-600 hover:text-white transition duration-200`}
+            >
+              {i}
+            </button>
+          ))}
+        </div>
+    
+       
+    
+        {/* Next Button */}
+        <button
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={currentPage === pagNumber.length}
+          className={`px-5 py-2 rounded-lg ${currentPage === pagNumber.length ? 'bg-gray-400 cursor-not-allowed' : 'bg-purple-700 text-white hover:bg-purple-600'} transition duration-200`}
+        >
+          Next
+        </button>
+
+         {/* Submit Button */}
+         <button
+          onClick={() => handleSubmit()}
+          className="mx-5 px-5 py-2 rounded-lg bg-green-600 text-white hover:bg-green-500 transition duration-200"
+        >
+          Submit
+        </button>
+      </div>
+    </>
+    
       
     )
 }
